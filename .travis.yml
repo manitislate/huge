@@ -1,9 +1,10 @@
 language: php
 
 php:
+    - 5.5
     - 5.6
-    - 7.0
-    - 7.1
+    # http://docs.travis-ci.com/user/languages/php/#PHP-nightly-builds
+    - '7.0'
     - hhvm
 
 # optional, define the environment, in this case useful to test stuff that only runs in development / production
@@ -23,12 +24,12 @@ before_script:
     - sudo service apache2 restart
     # composer
     - composer self-update
-    - composer install --prefer-source --no-interaction
+    - composer install --prefer-source --no-interaction --dev
     # go to tests folder
     - cd tests
 
 # run unit tests, create result file
-script: ../vendor/bin/phpunit --configuration phpunit.xml --coverage-text --coverage-clover=coverage.clover
+script: phpunit --configuration phpunit.xml --coverage-text --coverage-clover=coverage.clover
 
 # gets tools from Scrutinizer, uploads unit tests results to Scrutinizer (?)
 after_script:

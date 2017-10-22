@@ -1,0 +1,68 @@
+<div class="container">
+    <h1>GroupController/index</h1>
+    <div class="box">
+
+        <!-- echo out the system feedback (error and success messages) -->
+        <?php $this->renderFeedbackMessages(); ?>
+
+        <h3>What happens here ?</h3>
+        <p>
+            Connect with a mastermind.
+        </p>
+
+
+
+
+
+
+        <?php if ($this->availability) { ?>
+
+
+            <?php if ($this->businesses) { ?>
+                <table class="note-table">
+                    <thead>
+                    <tr>
+                        <td>Business Income</td>
+                        <td>EDIT</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($this->businesses as $key => $value) {
+
+                        if(isset($this->businesses))
+                            print "we've got records!";
+                        else print "we have no records!"
+
+                        ?>
+                        <tr>
+                            <td><?= htmlentities($value->income); ?></td>
+                            <td><a href="<?= Config::get('URL') . 'group/edit/' . $value->business_id; ?>">Edit</a></td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php } else { ?>
+                <div>
+                    <p>
+                        Your business income is not set yet. Please let us know how much you business makes so we can match
+                        you with others in your range of income. Masterminds work best with others who are closest to your
+                        business's income.
+                    </p>
+                    <p>
+                    <form method="post" action="<?php echo Config::get('URL');?>group/create">
+                        <label>Business Income: </label><input type="text" name="income"  />
+                        <input type="submit" value='Add my business income' autocomplete="off" />
+                    </form>
+                    </p>
+                </div>
+            <?php } ?>
+
+
+
+        <?php } else { ?>
+        <div>Availability must be set before finding a mastermind group.</div>
+            <form method="post" action="<?php echo Config::get('URL'); ?>newguy/index">
+                <input type="submit" value='Click Here to Set Availability' />
+            <?php } ?>
+    </div>
+</div>

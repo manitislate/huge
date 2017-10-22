@@ -16,8 +16,6 @@
                         <td>Id</td>
                         <td>Avatar</td>
                         <td>Username</td>
-                        <td>User's email</td>
-                        <td>Activated ?</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,8 +27,6 @@
                                 <?php } ?>
                             </td>
                             <td><?= $this->user->user_name; ?></td>
-                            <td><?= $this->user->user_email; ?></td>
-                            <td><?= ($this->user->user_active == 0 ? 'No' : 'Yes'); ?></td>
                         </tr>
                     </tbody>
                 </table>

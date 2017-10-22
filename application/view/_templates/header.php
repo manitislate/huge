@@ -1,79 +1,1 @@
-<!doctype html>
-<html>
-<head>
-    <title>HUGE</title>
-    <!-- META -->
-    <meta charset="utf-8">
-    <!-- send empty favicon fallback to prevent user's browser hitting the server for lots of favicon requests resulting in 404s -->
-    <link rel="icon" href="data:;base64,=">
-    <!-- CSS -->
-    <link rel="stylesheet" href="<?php echo Config::get('URL'); ?>css/style.css" />
-</head>
-<body>
-    <!-- wrapper, to center website -->
-    <div class="wrapper">
-
-        <!-- logo -->
-        <div class="logo"></div>
-
-        <!-- navigation -->
-        <ul class="navigation">
-            <li <?php if (View::checkForActiveController($filename, "index")) { echo ' class="active" '; } ?> >
-                <a href="<?php echo Config::get('URL'); ?>index/index">Index</a>
-            </li>
-            <li <?php if (View::checkForActiveController($filename, "profile")) { echo ' class="active" '; } ?> >
-                <a href="<?php echo Config::get('URL'); ?>profile/index">Profiles</a>
-            </li>
-            <?php if (Session::userIsLoggedIn()) { ?>
-                <li <?php if (View::checkForActiveController($filename, "dashboard")) { echo ' class="active" '; } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>dashboard/index">Dashboard</a>
-                </li>
-                <li <?php if (View::checkForActiveController($filename, "note")) { echo ' class="active" '; } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>note/index">My Notes</a>
-                </li>
-            <?php } else { ?>
-                <!-- for not logged in users -->
-                <li <?php if (View::checkForActiveControllerAndAction($filename, "login/index")) { echo ' class="active" '; } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>login/index">Login</a>
-                </li>
-                <li <?php if (View::checkForActiveControllerAndAction($filename, "register/index")) { echo ' class="active" '; } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>register/index">Register</a>
-                </li>
-            <?php } ?>
-        </ul>
-
-        <!-- my account -->
-        <ul class="navigation right">
-        <?php if (Session::userIsLoggedIn()) : ?>
-            <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                <a href="<?php echo Config::get('URL'); ?>user/index">My Account</a>
-                <ul class="navigation-submenu">
-                    <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>user/changeUserRole">Change account type</a>
-                    </li>
-                    <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>user/editAvatar">Edit your avatar</a>
-                    </li>
-                    <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>user/editusername">Edit my username</a>
-                    </li>
-                    <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>user/edituseremail">Edit my email</a>
-                    </li>
-                    <li <?php if (View::checkForActiveController($filename, "user")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>user/changePassword">Change Password</a>
-                    </li>
-                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >
-                        <a href="<?php echo Config::get('URL'); ?>login/logout">Logout</a>
-                    </li>
-                </ul>
-            </li>
-            <?php if (Session::get("user_account_type") == 7) : ?>
-                <li <?php if (View::checkForActiveController($filename, "admin")) {
-                    echo ' class="active" ';
-                } ?> >
-                    <a href="<?php echo Config::get('URL'); ?>admin/">Admin</a>
-                </li>
-            <?php endif; ?>
-        <?php endif; ?>
-        </ul>
+<!doctype html><html><head>    <?php    if (isset($this->title)){        echo '<title>' . $this->title . '</title>';    }    else {        echo '<title>iLOVEmasterminds.com : Makes finding a mastermind easy</title>';    } ?>    <!-- META -->    <meta charset="utf-8">    <!-- send empty favicon fallback to prevent user's browser hitting the server for lots of favicon requests resulting in 404s -->    <link rel="icon" href="data:;base64,=">    <?php    if (isset($this->description)){        echo '<meta name="description" content="'. $this->description .'" >';    }    else {        echo '<meta name="description" content="iLOVEmasterminds helps you find a mastermind quickly and easily. Meet other entrepreneurs, get encouraged, and get connected. Join a mastermind now." >';    } ?>    <?php    if (isset($this->keywords)){ ?>        <meta name="keywords" content="<?php echo $this->keywords . '" >';    }    else {        echo '<meta name="keywords" content="how to find a mastermind, entrepreneur, schedule, connect, meet other entrepreneurs" >';    } ?>    <meta name="robots" content="index, follow">    <meta name="revisit-after" content="3 month">    <meta http-equiv=”content-language” content=”en-us”>    <!-- find, mastermind, entrepreneur -->    <!-- CSS -->    <link rel="stylesheet" href="<?php echo Config::get('URL'); ?>css/style.css" >    <script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js'></script>    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>    <script language="javascript">        $(document).ready(function() {            <?php if (!isset($_SESSION['tz'])) { ?>            $.ajax({                type: "POST",                url: "<?php echo Config::get('URL'); ?>",                data: 'timezone=' + jstz.determine().name(),                success: function(data){                    location.reload();                }            });            <?php } ?>        });    </script></head><body><script>    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');    ga('create', 'UA-64156353-1', 'auto');    ga('send', 'pageview');</script>    <!-- wrapper, to center website -->    <div class="wrapper">        <!-- logo -->        <div class="logo"></div>        <!-- navigation -->        <ul class="navigation">            <li <?php if (View::checkForActiveController($filename, "index")) { echo ' class="active" '; } ?> >                <a href="<?php echo Config::get('URL'); ?>index/index">Index</a>            </li>            <li <?php if (View::checkForActiveController($filename, "blog")) { echo ' class="active" '; } ?> >                <a href="<?php echo Config::get('URL'); ?>blog/index">Blog</a>            </li>            <li <?php if (View::checkForActiveController($filename, "aboutme")) { echo ' class="active" '; } ?> >                <a href="<?php echo Config::get('URL'); ?>aboutme/index">About Me</a>            </li>            <?php if (Session::userIsLoggedIn()) { ?>                <li <?php if (View::checkForActiveController($filename, "newguy")) { echo ' class="active" '; } ?> >                    <a href="<?php echo Config::get('URL'); ?>newguy/index">Availability</a>                </li>                <li <?php if (View::checkForActiveController($filename, "group")) { echo ' class="active" '; } ?> >                    <a href="<?php echo Config::get('URL'); ?>group/index">Group</a>                </li>            <?php } else { ?>                <!-- for not logged in users -->                <li <?php if (View::checkForActiveControllerAndAction($filename, "login/index")) { echo ' class="active" '; } ?> >                    <a href="<?php echo Config::get('URL'); ?>login/index">Login</a>                </li>                <li <?php if (View::checkForActiveControllerAndAction($filename, "login/register")) { echo ' class="active" '; } ?> >                    <a href="<?php echo Config::get('URL'); ?>login/register">Register</a>                </li>            <?php } ?>        </ul>        <!-- my account -->        <ul class="navigation right">        <?php if (Session::userIsLoggedIn()) : ?>            <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                <a href="<?php echo Config::get('URL'); ?>login/showprofile">My Account</a>                <ul class="navigation-submenu">                    <?php                    //hide this for now...                    /**                     *                     * <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                     * <a href="<?php echo Config::get('URL'); ?>login/changeUserRole">Change account type</a>                     * </li>                     *                     */                    ?>                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                        <a href="<?php echo Config::get('URL'); ?>login/editAvatar">Edit your avatar</a>                    </li>                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                        <a href="<?php echo Config::get('URL'); ?>login/editusername">Edit my username</a>                    </li>                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                        <a href="<?php echo Config::get('URL'); ?>login/edituseremail">Edit my email</a>                    </li>                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                        <a href="<?php echo Config::get('URL'); ?>login/changePassword">Change Password</a>                    </li>                    <li <?php if (View::checkForActiveController($filename, "login")) { echo ' class="active" '; } ?> >                        <a href="<?php echo Config::get('URL'); ?>login/logout">Logout</a>                    </li>                </ul>            </li>            <?php if (Session::get("user_account_type") == 7) : ?>                <li <?php if (View::checkForActiveController($filename, "admin"))                    echo ' class="active" ';                 ?> >                    <a href="<?php echo Config::get('URL'); ?>admin/">Admin</a>                </li>            <?php endif; ?>        <?php endif; ?>        </ul>

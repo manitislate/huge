@@ -1,0 +1,69 @@
+<div class="container">
+    <h1>Find a Group</h1>
+    <div class="box">
+
+        <!-- echo out the system feedback (error and success messages) -->
+        <?php $this->renderFeedbackMessages(); ?>
+        <?php
+            if (isset($this->sorry)){
+                echo '<h3>Sorry, We could not find a match yet.</h3>'; ?>
+                        <p>You've done your part, now just sit back and relax. You will be notified as soon as I find
+                        another user to join you in a mastermind group.</p>
+
+                <p>Come on over to my <a href="https://www.facebook.com/groups/1634104163469609/">private facebook group</a>. Help someones business, by brainstorming ideas, and you may be picked
+                    to be on the hotseat next!</p>
+
+
+
+            <?php }?>
+
+
+
+
+
+        <!-- check if user has set availability -->
+        <?php if ($this->availability) {?>
+           
+            
+           <!-- display business income with an option to edit it, but not delete (can be set to 0) -->
+            <?php if ($this->in_group) {
+                    Redirect::to('group/displayGroups');
+                    ?>
+
+           <!-- lets find a group -->
+            <?php } else { ?>
+                <div>
+                    <p>
+                        To find a group, click the button below.
+                    </p>
+                    <p>
+                    <form method="post" action="<?php echo Config::get('URL');?>group/find">
+                        <input type="submit" value='Find a group' autocomplete="off" />
+                    </form>
+                    </p>
+                </div>
+            <?php }
+
+                ?>
+
+
+
+
+
+            <!-- Business income was not set, so let the user input income -->
+            <?php } ?>
+
+
+
+
+ 
+
+        <!-- Since the user has not set availability, let user click over to availability tab -->
+        <?php } else { ?>
+        <h3>Please Set Your Availability</h3>
+        <div>Availability must be set before finding a mastermind group.</div>
+            <form method="post" action="<?php echo Config::get('URL'); ?>newguy/index">
+                <input type="submit" value='Click Here to Set Availability' />
+            <?php } ?>
+    </div>
+</div>

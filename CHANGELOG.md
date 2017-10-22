@@ -1,13 +1,9 @@
 # CHANGE LOG
 
-For the newest (und unstable) version always check the develop branch, for beta check 
-master branch, for really stable stuff check the releases (the ones that have a real version number :))
+For the newest (und unstable) version always check the develop branch.
 
-## master branch
+## develop branch
 
-- [slaveek/panique] [PR](https://github.com/panique/huge/pull/773) [#770] fix for sending user back to last visited page after login
-- [slaveek] [PR](https://github.com/panique/huge/pull/815) lots of code styling fixes 
-- [panique] [#729] Fix, mail sending now returns true or false success status (https://github.com/panique/huge/issues/729)
 - [OmarElGabry] [PR](https://github.com/panique/huge/pull/693) session id regeneration in certain situations
 - [OmarElGabry] [PR](https://github.com/panique/huge/pull/693) encrypted cookies
 - [OmarElGabry] [PR](https://github.com/panique/huge/pull/693) new encryption class

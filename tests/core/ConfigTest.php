@@ -21,21 +21,18 @@ class ConfigTest extends PHPUnit_Framework_TestCase
 		Config::$config = null;
 	}
 
-    /**
-     * Checks if the correct config file for an EXISTING environment / config is called.
-     */
 	public function testGetDefaultEnvironment()
 	{
-        // manually set environment to "development"
+		// fake application constants
 		putenv('APPLICATION_ENV=development');
 
-		// now get the default action to see if the correct config file (for development) is called
+		// call for environment should return "development"
 		$this->assertEquals('index', Config::get('DEFAULT_ACTION'));
 	}
 
 	public function testGetFailingEnvironment()
 	{
-        // manually set environment to "foobar" (and non-existing environment)
+		// fake application constants
 		putenv('APPLICATION_ENV=foobar');
 
 		// call for environment should return false because config.foobar.php does not exist
